@@ -1,3 +1,3 @@
 export default function Home() {
-  return <h1>final-project-sample v02안녕안녕 메롱메롱 하이~ 바이~ ㅋㅋㅋ</h1>;
+  return <h1>final-project-sample v02안녕안녕 메롱</h1>;
 }
