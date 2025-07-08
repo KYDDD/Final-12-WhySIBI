@@ -23,7 +23,7 @@ jobs:
           source-directory: "output"
           destination-github-username: KYDDD
           destination-repository-name: Final-12-WhySIBI
-          user-email: ${{ secrets.EAMAIL_KYDDD }}
+          user-email: ${{ secrets.EMAIL_KYDDD }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
       - name: Test get variable exported by push-to-another-repository
