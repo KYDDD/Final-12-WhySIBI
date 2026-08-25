@@ -1,0 +1,11 @@
+{
+  "name": "WhySIBI (나혼자산다)",
+  "install": "npm ci && { [ -f .env.local ] || printf 'NEXT_PUBLIC_API_URL=https://fesp-api.koyeb.app/market\\nNEXT_PUBLIC_CLIENT_ID=febc13-final12-emjf\\n' > .env.local; }",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "npm run dev"
+    }
+  ],
+  "ports": [3000]
+}
