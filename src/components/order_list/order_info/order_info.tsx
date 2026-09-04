@@ -1,11 +1,24 @@
-import { OrderProduct } from '@/types/order';
+'use client';
+import { OrderItem, OrderProduct } from '@/types/order';
+import { downloadOrderReceipt } from '@/utils/downloadReceipt';
 import Image from 'next/image';
 import Link from 'next/link';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-function OrderProductInfo({ _id, price, name, image, state }: OrderProduct) {
+interface OrderProductInfoProps extends OrderProduct {
+  order: OrderItem;
+}
+
+function OrderProductInfo({
+  _id,
+  price,
+  name,
+  image,
+  state,
+  order,
+}: OrderProductInfoProps) {
   let deliveryState = '';
   if (state === 'OS010') {
     deliveryState = '상품준비중';
@@ -16,6 +29,11 @@ function OrderProductInfo({ _id, price, name, image, state }: OrderProduct) {
   } else if (state === 'OS035') {
     deliveryState = '배송완료';
   }
+
+  const handleDownloadReceipt = useCallback(() => {
+    downloadOrderReceipt(order);
+  }, [order]);
+
   return (
     <li className="w-4/5 border-2 border-button-color-opaque-25 shadow-shadow-md p-5 rounded-radius-lg">
       <p className="font-logo text-2xl ml-5">{deliveryState}</p>
@@ -53,10 +71,17 @@ function OrderProductInfo({ _id, price, name, image, state }: OrderProduct) {
           </Link>
           <Link
             href={`/my_page/reviews/write/${_id}`}
-            className="block rounded-radius-full px-16 py-3 border-2 text-button-color bg-columbia-blue-300"
+            className="block rounded-radius-full px-16 py-3 border-2 text-button-color bg-columbia-blue-300 mb-5"
           >
             리뷰 작성하기
           </Link>
+          <button
+            type="button"
+            onClick={handleDownloadReceipt}
+            className="block w-full rounded-radius-full px-16 py-3 border-2 border-gray-300 text-button-color hover:bg-gray-50 cursor-pointer"
+          >
+            영수증 다운로드
+          </button>
         </div>
       </div>
     </li>

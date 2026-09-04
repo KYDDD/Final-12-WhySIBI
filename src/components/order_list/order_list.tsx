@@ -48,6 +48,7 @@ export default function OrderList({ orderItem }: OrderListProp) {
               name={product.name}
               image={product.image}
               state={order.state}
+              order={order}
             />
           )),
         )}
